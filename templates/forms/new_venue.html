@@ -6,9 +6,6 @@
             color: red;
         }
     </style>
-    <!--
-                error messages so the user would understand what's going on                 
-                src: https://flask-wtf.readthedocs.io/en/0.15.x/quickstart/#creating-forms-->
     {% if form.name.errors %} {% for field, errors in form.errors.items() %}
     <small class="form-text text-muted" id="msg-validation-error">
                 {{ ', '.join(errors) }}
