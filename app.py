@@ -82,8 +82,6 @@ def index():
 def venues():
   # TODO: replace with real venues data.
   #       num_shows should be aggregated based on number of upcoming shows per venue.
-  # first venues for the same city and state shoud be aggregated using group_by :).
-  # then based on the number of upcoming shows they should be ordered.
   data = [] # a list containig all view results
   groups = db.session.query(Venue.city, Venue.state).group_by(Venue.city, Venue.state).all()
   if not groups: 
@@ -133,11 +131,7 @@ def show_venue(venue_id):
     "past_shows_count": 0,
     "upcoming_shows_count": 0,
   }
-  #? first take all shows past/upcomming from the db
-  #? next append them in the suitable format to the list :)
-  #? SIMPLE 
-  #!# data['past_shows'].append({db.session.query()})
-  #! data['past_shows_count']=len(past_shows)
+  
   all_past_shows = db.session.query(Show).join(Venue).filter(Show.venue_id==venue_id).filter(Show.start_time<datetime.now()).all()
   past_shows_list = []
 
@@ -182,7 +176,7 @@ def create_venue_submission():
   # TODO: insert form data as a new Venue record in the db, instead
   # TODO: modify data to be the data object returned from db insertion 
 
-  form = VenueForm() #? wtf-forms Quickstart src: https://flask-wtf.readthedocs.io/en/0.15.x/quickstart/#creating-forms
+  form = VenueForm()
   if form.validate_on_submit():
       try:
           name_reserved = db.session.query(Venue).filter_by(name=form.name.data).first()

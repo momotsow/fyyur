@@ -21,7 +21,6 @@ class Genre(enum.Enum):
     Soul='Soul'
     Other='Other'
 
-
     @classmethod
     def choices(cls):
         """ Methods decorated with @classmethod can be called statically without having an instance of the class."""
